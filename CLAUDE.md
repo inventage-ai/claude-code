@@ -22,6 +22,7 @@ Claude Code plugin marketplace by Inventage. Contains reusable skills/tools dist
 - Each plugin must be self-contained (no shared dependencies between plugins)
 - Skills should document their requirements (e.g., Node.js) in `SKILL.md`
 - Commit messages follow conventional commits format (`feat:`, `fix:`, `docs:`)
+- When renaming a skill, update all references: `SKILL.md` frontmatter, `plugin.json`, `marketplace.json`, and `README.md`
 
 ## Versioning
 
