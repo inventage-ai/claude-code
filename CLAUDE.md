@@ -22,3 +22,17 @@ Claude Code plugin marketplace by Inventage. Contains reusable skills/tools dist
 - Each plugin must be self-contained (no shared dependencies between plugins)
 - Skills should document their requirements (e.g., Node.js) in `SKILL.md`
 - Commit messages follow conventional commits format (`feat:`, `fix:`, `docs:`)
+
+## Versioning
+
+Plugins are versioned using semver. The `scripts/version.sh` script keeps `plugin.json` and `marketplace.json` in sync.
+
+```bash
+# List all plugins and their versions
+./scripts/version.sh list
+
+# Bump a plugin version (patch, minor, or major)
+./scripts/version.sh bump <plugin> <patch|minor|major>
+```
+
+The `bump` command updates both JSON files and prints suggested `git commit` and `git tag` commands — it does **not** commit or tag automatically. Tags follow the `<plugin>@<version>` format (e.g., `gh-markdown@1.0.1`).
