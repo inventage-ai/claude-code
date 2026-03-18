@@ -23,7 +23,7 @@ Convert Markdown files to self-contained, GitHub-styled HTML. Requires only Node
 **Usage:**
 
 ```
-/gh-markdown:gh-markdown input.md [output.html]
+/gh-markdown:md-to-html input.md [output.html]
 ```
 
 ## Documentation
