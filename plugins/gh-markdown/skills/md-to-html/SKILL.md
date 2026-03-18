@@ -1,5 +1,5 @@
 ---
-name: gh-markdown
+name: md-to-html
 description: Convert Markdown files to self-contained, standalone HTML with GitHub's rendering style. Uses marked for GFM parsing and inlines github-markdown-css for zero external dependencies. Requires only Node.js. Use when the user asks to "convert md to html", "render markdown as html", "github-style html from markdown", or wants an HTML version of a .md file that looks like GitHub.
 ---
 
@@ -12,7 +12,7 @@ Convert `.md` files to **fully self-contained** `.html` files styled like GitHub
 Run the bundled script:
 
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/skills/gh-markdown/scripts/md-to-html.mjs <input.md> [output.html]
+node ${CLAUDE_PLUGIN_ROOT}/skills/md-to-html/scripts/md-to-html.mjs <input.md> [output.html]
 ```
 
 - If no output path is given, writes `<input-name>.html` next to the source file.
@@ -37,5 +37,5 @@ To update the bundled CSS to a newer version:
 
 ```bash
 curl -sL "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/<VERSION>/github-markdown.min.css" \
-  -o ${CLAUDE_PLUGIN_ROOT}/skills/gh-markdown/assets/github-markdown.min.css
+  -o ${CLAUDE_PLUGIN_ROOT}/skills/md-to-html/assets/github-markdown.min.css
 ```
