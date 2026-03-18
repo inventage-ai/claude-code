@@ -1,0 +1,24 @@
+{
+  "name": "inventage-ai-claude-code",
+  "owner": {
+    "name": "Inventage AI",
+    "email": "ai@inventage.com"
+  },
+  "metadata": {
+    "description": "Claude Code plugins by Inventage",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "gh-markdown",
+      "source": "./plugins/gh-markdown",
+      "description": "Convert Markdown to self-contained GitHub-styled HTML. Requires only Node.js.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Inventage AI"
+      },
+      "license": "MIT",
+      "keywords": ["markdown", "html", "github", "converter"]
+    }
+  ]
+}
