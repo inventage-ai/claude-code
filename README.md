@@ -26,6 +26,14 @@ Convert Markdown files to self-contained, GitHub-styled HTML. Requires only Node
 /gh-markdown:gh-markdown input.md [output.html]
 ```
 
+## Documentation
+
+- [Create plugins](https://code.claude.com/docs/en/plugins) — how to build Claude Code plugins with skills, agents, hooks, and MCP servers
+- [Discover and install plugins](https://code.claude.com/docs/en/discover-plugins) — browse marketplaces and install plugins
+- [Create and distribute a marketplace](https://code.claude.com/docs/en/plugin-marketplaces) — package and share plugins via marketplaces
+- [Plugins reference](https://code.claude.com/docs/en/plugins-reference) — complete technical specifications (manifest schema, versioning, debugging)
+- [Agent Skills](https://code.claude.com/docs/en/skills) — skill authoring guide
+
 ## License
 
 MIT
