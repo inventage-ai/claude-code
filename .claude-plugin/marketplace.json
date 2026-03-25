@@ -15,10 +15,21 @@
       "description": "Convert Markdown to self-contained GitHub-styled HTML. Requires only Node.js.",
       "version": "1.0.0",
       "author": {
-        "name": "Inventage AI"
+        "name": "Peter Siska"
       },
       "license": "MIT",
       "keywords": ["markdown", "html", "github", "converter"]
+    },
+    {
+      "name": "worktree",
+      "source": "./plugins/worktree",
+      "description": "Git worktree hooks, allowing to run an optional `worktree-init.sh` script to setup the new worktree with regards to non-tracked files.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Gianluca Vinzens, Philippe Lovis"
+      },
+      "license": "MIT",
+      "keywords": ["git", "worktree"]
     }
   ]
 }

@@ -3,7 +3,8 @@
   "description": "Convert Markdown to self-contained GitHub-styled HTML. Requires only Node.js.",
   "version": "1.0.0",
   "author": {
-    "name": "Inventage AI"
+    "name": "Peter Siska"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": ["markdown", "html", "github", "converter"]
 }
