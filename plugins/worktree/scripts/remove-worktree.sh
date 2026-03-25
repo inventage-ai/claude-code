@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # WorktreeRemove hook: Removes a git worktree and deletes its associated branch if it contains no commits.
-# Input: JSON on stdin from Claude Code with `worktreePath` property, representing the branch path.
+# Input: JSON on stdin from Claude Code with `worktree_path` property, representing the branch path.
 
 worktree_path=$(jq -r '.worktree_path')
 
@@ -16,7 +16,8 @@ fi
 
 cd "$worktree_path"
 branch=$(git branch --show-current)
-commit_count=$(git rev-list --count "$(git merge-base main "$branch")..$branch")
+default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
+commit_count=$(git rev-list --count "$(git merge-base "$default_branch" "$branch")".."$branch")
 
 repo_base_dir=$(git worktree list --porcelain | awk '/worktree/ {print $2; exit}')
 cd "$repo_base_dir"

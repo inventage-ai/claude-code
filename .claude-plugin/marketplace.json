@@ -24,7 +24,7 @@
       "name": "worktree",
       "source": "./plugins/worktree",
       "description": "Git worktree hooks, allowing to run an optional `worktree-init.sh` script to setup the new worktree with regards to non-tracked files.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Gianluca Vinzens, Philippe Lovis"
       },

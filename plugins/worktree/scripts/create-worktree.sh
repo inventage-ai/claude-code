@@ -36,7 +36,7 @@ if [[ -d "$worktree_dir" ]]; then
 fi
 
 branch="$name"
-if [[ "$name" =~ ^(feature|feat|bugfix|fix|chore)-(.+)$ ]]; then
+if [[ "$name" =~ ^(feature|feat|bugfix|hotfix|fix|chore|test|docs|refactor|release)-(.+)$ ]]; then
   branch="${BASH_REMATCH[1]}/${BASH_REMATCH[2]}"
 fi
 

@@ -58,7 +58,7 @@ For the time being there is an open GitHub [issue](https://github.com/anthropics
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/plugins/cache/inventage-ai-claude-code/worktree/1.0.0/scripts/create-worktree.sh"
+            "command": "~/.claude/plugins/cache/inventage-ai-claude-code/worktree/1.0.1/scripts/create-worktree.sh"
           }
         ]
       }
@@ -68,7 +68,7 @@ For the time being there is an open GitHub [issue](https://github.com/anthropics
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/plugins/cache/inventage-ai-claude-code/worktree/1.0.0/scripts/remove-worktree.sh"
+            "command": "~/.claude/plugins/cache/inventage-ai-claude-code/worktree/1.0.1/scripts/remove-worktree.sh"
           }
         ]
       }
@@ -103,7 +103,7 @@ pnpm_base_dirs=(
 )
 
 
-repo_base_dir=$(git worktree list --porcelain | awk '/worktree/ {print $2; exit}')
+repo_base_dir=$(git worktree list --porcelain | head -n 1 | sed 's/^worktree //')
 for f in "${files_to_copy[@]}"; do
   src="$repo_base_dir/$f"
   if [[ -f "$src" ]]; then
@@ -119,7 +119,7 @@ for dir in "${pnpm_base_dirs[@]}"; do
 done
 
 # Allow .env files to be loaded
-direnv allow
+direnv allow .
 ```
 
 ## Documentation
