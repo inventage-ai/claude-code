@@ -2,6 +2,7 @@
 
 // GitHub Markdown to self-contained HTML converter
 // Uses marked for GFM parsing + github-markdown-css
+// Renders ```mermaid fences via bundled mermaid.min.js
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, basename, resolve, join } from 'node:path';
@@ -12,6 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const SKILL_DIR = dirname(__dirname);
 const CSS_FILE = join(SKILL_DIR, 'assets', 'github-markdown.min.css');
+const MERMAID_FILE = join(SKILL_DIR, 'assets', 'mermaid.min.js');
 
 // Auto-install marked if not available
 let marked;
@@ -42,11 +44,54 @@ try {
 const output = args[1] ? resolve(args[1]) : input.replace(/\.md$/, '.html');
 const title = basename(input, '.md');
 
+const escapeHtml = (s) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+let hasMermaid = false;
+
+// Override fenced-code rendering so mermaid blocks become <pre class="mermaid">
+marked.use({
+  renderer: {
+    code(...rendererArgs) {
+      // Support both v12+ (object token) and older (positional) signatures
+      let text, lang;
+      if (rendererArgs[0] && typeof rendererArgs[0] === 'object') {
+        ({ text, lang } = rendererArgs[0]);
+      } else {
+        [text, lang] = rendererArgs;
+      }
+      const language = (lang || '').trim().split(/\s+/)[0];
+      if (language === 'mermaid') {
+        hasMermaid = true;
+        return `<pre class="mermaid">${escapeHtml(text)}</pre>\n`;
+      }
+      return false; // fall through to default renderer
+    },
+  },
+});
+
 // Parse markdown with GFM enabled
 const htmlContent = marked(md, { gfm: true });
 
 // Read bundled CSS
 const css = readFileSync(CSS_FILE, 'utf-8');
+
+// Inline mermaid only when needed (the bundle is ~3 MB)
+let mermaidBlock = '';
+if (hasMermaid) {
+  const mermaidJs = readFileSync(MERMAID_FILE, 'utf-8');
+  mermaidBlock = `
+  <script>
+${mermaidJs}
+  </script>
+  <script>
+    (function () {
+      var mq = window.matchMedia('(prefers-color-scheme: dark)');
+      mermaid.initialize({ startOnLoad: true, theme: mq.matches ? 'dark' : 'default' });
+      mq.addEventListener('change', function () { location.reload(); });
+    })();
+  </script>`;
+}
 
 // Write self-contained HTML
 const html = `<!doctype html>
@@ -68,12 +113,18 @@ ${css}
         padding: 15px;
       }
     }
+    .markdown-body pre.mermaid {
+      background: transparent;
+      text-align: center;
+      padding: 16px 0;
+      overflow: visible;
+    }
   </style>
 </head>
 <body>
   <article class="markdown-body">
 ${htmlContent}
-  </article>
+  </article>${mermaidBlock}
 </body>
 </html>`;
 
